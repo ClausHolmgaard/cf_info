@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import TopText from "./TopText";
-import TextBlock from "./TextBlock";
+import TopText from "../TopText";
+import TextBlock from "../TextBlock";
+import PanelDiv from "./PanelDiv";
 
 const TextDiv = styled.div`
     //position: relative;
@@ -22,13 +23,13 @@ const InfoText = [
 
 const InfoPanel = () => {
     return (
-        <>
+        <PanelDiv justifyContent={'space-between'}>
             <TopText text={'Info'} />
             <TextDiv>
-                <TextBlock textArr={InfoText}/>
+                <TextBlock paddingTop={'100px'} textArr={InfoText}/>
             </TextDiv>
             <div></div>
-        </>
+        </PanelDiv>
     )
 }
 

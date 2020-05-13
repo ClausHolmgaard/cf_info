@@ -4,19 +4,15 @@ import styled from "styled-components";
 
 const StyledText = styled.div`
     text-align: center;
-    align-self: center;
-    height: 100%;
-    //vertical-align: middle;
-    //position: relative;
-    //top: 50%;
-    //transform: translateY(-50%);
-    //border: 1px solid red;
+    border: 1px solid blue;
+    padding-top: ${(props) => props.paddingTop};
+    padding-left: ${(props) => props.paddingLeft};
 `;
 
 
-const TextBlock = ({textArr}) => {
+const TextBlock = ({textArr, paddingTop, paddingLeft}) => {
     return (
-        <StyledText>
+        <StyledText paddingTop={paddingTop} paddingLeft={paddingLeft}>
             {textArr.map((text, i) => <div key={i}>{text}</div>)}
         </StyledText>
     )

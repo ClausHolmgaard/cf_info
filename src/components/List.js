@@ -4,9 +4,8 @@ import styled from 'styled-components';
 const StyledList = styled.ul`
     list-style: none;
     text-align: center;
-    //position: relative;
-    //top: 30%;
-    //transform: translateY(-50%);
+    //flex: ${(props) => (props.flex ? 0 : 1)};
+    border: 1px solid red;
 `;
 
 const List = () => {
