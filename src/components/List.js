@@ -4,16 +4,15 @@ import styled from 'styled-components';
 const StyledList = styled.ul`
     list-style: none;
     text-align: center;
+    font-size: 40px;
     //flex: ${(props) => (props.flex ? 0 : 1)};
-    border: 1px solid red;
+    //border: 1px solid red;
 `;
 
-const List = () => {
+const List = ({textArr}) => {
     return (
         <StyledList>
-            <li>Item 1</li>
-            <li>An item with a longer text, which is this item...</li>
-            <li>Item 2</li>
+            {textArr.map(text => text ? <li>{text}</li> : <li>{'    '}</li> )}
         </StyledList>
     );
 }

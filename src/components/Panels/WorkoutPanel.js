@@ -1,38 +1,105 @@
 import React, {useState, useEffect} from "react";
-import List from "../List";
 import TopText from "../TopText";
 import PanelDiv from "./PanelDiv";
+import TextBlock from "../TextBlock";
+import useInterval from "../../Helpers/UseInterval";
 
-
+const UPDATE_INTERVAL =  30 * 1000;  // in ms
+const REGEX_SPLIT = /\n-?/;
 
 const WorkoutPanel = (props) => {
     const [hasError, setErrors] = useState(false);
-    const [planets, setPlanets] = useState({});
+    const [workoutJson, setWorkoutJson] = useState({});
+    const [workoutIndex, setWorkoutIndex] = useState(0);
 
-    async function fetchData() {
-        fetch(props.url, {
-            headers: {
+    const getData = () => {
+        const currentTime = new Date();
+        const year = currentTime.getFullYear();
+        const month = (currentTime.getMonth() + 1).toString().padStart(2, '0');
+        const day = currentTime.getDate().toString().padStart(2, '0');
+        const currentTimeString = `${year}${month}${day}`;
 
-            }
-        })
-            .then(data => data.json())
-            .then(json => setPlanets(json))
+        //console.log(`Current time: ${currentTimeString}`);
+
+        const workoutUrl = new URL(`${props.url}/workouts`);
+        workoutUrl.searchParams.append('dates', currentTimeString);
+        workoutUrl.searchParams.append('track_id', 'NR6EwZlfwy');
+        console.log(workoutUrl.toString());
+
+        fetch(workoutUrl.toString())
+            .then(data => {
+                //console.log(data);
+                return data.json();
+            })
+            .then(json => {
+                setWorkoutJson(json);
+            })
             .catch(err => setErrors(err));
+
+        //console.log(`Workout: ${JSON.stringify(workoutJson)}`)
     }
 
-    useEffect(() => {
-        fetchData();
-        console.log(`Planets: ${JSON.stringify(planets)}`)
-    }, [planets]);
+    useEffect( () => {
+        getData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    useInterval( () => {
+        getData();
+
+        if(workoutJson.data === undefined) {
+            return;
+        }
+
+        const numWorkouts = Object.keys(workoutJson.data).length;
+        if(workoutIndex === numWorkouts - 1) {
+            setWorkoutIndex(0);
+        } else {
+            setWorkoutIndex(workoutIndex + 1);
+        }
+        console.log(`WorkoutIndex: ${workoutIndex}`);
+    }, UPDATE_INTERVAL)
+
+    const getTitle = (index) => {
+        if(workoutJson.data === undefined) {
+            return 'No data';
+        }
+        return workoutJson.data[index].attributes.title;
+    }
+
+    const getDescription = (index) => {
+        if(workoutJson.data === undefined) {
+            return ['No data'];
+        }
+        //const descString =
+        //const descArray = descString.split('\n');
+        //console.log(descArray);
+        return workoutJson.data[index].attributes.description.split(REGEX_SPLIT);
+    }
+
+    const getScoreType = (index) => {
+        if(workoutJson.data === undefined) {
+            return ['No data'];
+        }
+        return workoutJson.data[index].attributes.score_type.split('\n');
+    }
+
+    const showError = () => {
+        if(hasError) {
+            return <div>Error when getting data</div>
+        } else {
+            return;
+        }
+    }
 
     return (
-        <PanelDiv justifyContent={'space-between'}>
-            <TopText text={'Workout'}/>
-            <List />
-            <div></div>
+        <PanelDiv justifyContent={'space-evenly'}>
+            <TopText text={getTitle(workoutIndex)}/>
+            <TextBlock textArr={getDescription(workoutIndex)} fontSize={'30px'}/>
 
-            <span>{JSON.stringify(planets)}</span>
-            <span>Has error: {JSON.stringify(hasError)}</span>
+            <TextBlock textArr={getScoreType(workoutIndex)} />
+
+            {showError()}
         </PanelDiv>
     )
 }

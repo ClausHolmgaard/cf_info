@@ -4,6 +4,8 @@ import InfoPanel from "./Panels/InfoPanel";
 import WorkoutPanel from "./Panels/WorkoutPanel";
 import CoachPanel from "./Panels/CoachPanel";
 
+const infoUrl = 'http://localhost:3300'
+
 const Grid = styled.div`
     display: flex;
     height: 100vh;
@@ -26,14 +28,12 @@ const Row = styled.div`
     justify-content: space-between;
 `;
 
-
-
 function App() {
   return (
     <Grid>
         <Col size={1}>
             <Row size={1}>
-                <WorkoutPanel url={'https://api.sugarwod.com/v2'}/>
+                <WorkoutPanel url={infoUrl}/>
             </Row>
         </Col>
         <Col size={1}>

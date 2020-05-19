@@ -26,7 +26,7 @@ const InfoPanel = () => {
         <PanelDiv justifyContent={'space-between'}>
             <TopText text={'Info'} />
             <TextDiv>
-                <TextBlock paddingTop={'100px'} textArr={InfoText}/>
+                <TextBlock textArr={InfoText}/>
             </TextDiv>
             <div></div>
         </PanelDiv>

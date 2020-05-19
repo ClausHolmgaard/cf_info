@@ -5,20 +5,26 @@ import TopText from "../TopText";
 import PanelDiv from "./PanelDiv";
 
 const CoachImgDiv = styled.div`
-    border: 1px solid red;
+    position: relative;
     display: flex;
     flex-direction: row;
     //flex-wrap: nowrap;
-    align-items: flex-start;
-    //justify-content: space-between;
+    //align-items: stretch;
+    justify-content: center;
+    //border: 1px solid red;
 `;
 
 const CoachImg = styled.img`
-    max-height: 20%;
+    position: absolute;
+    z-index: -1;
+    //bottom: 5px;
+    left: 5px;
+    //max-height: 20%;
     max-width: 20%;
-    //object-fit: contain;
+    object-fit: contain;
     align-self: flex-start;
-    border: 1px solid blue;
+    padding-top: 10px;
+    //border: 1px solid blue;
 `;
 
 const imageUrl = 'https://upload.wikimedia.org/wikipedia/commons/c/c4/PM5544_with_non-PAL_signals.png'
@@ -31,19 +37,21 @@ const InfoText = [
     'And another line',
     'Event more line!',
     ':O',
+    'A very very very very very very very very very very long line',
     'Event more line!',
     'Event more line!',
 ]
 
 const CoachPanel = () => {
+
     return (
         <PanelDiv>
             <TopText text={'Coaches'} />
 
             <CoachImgDiv>
                 <CoachImg src={imageUrl} />
-                <TextBlock paddingTop={'50px'} paddingLeft={'100px'} textArr={InfoText}/>
-
+                <TextBlock textArr={InfoText} paddingTop={'10px'} />
+                <div />
             </CoachImgDiv>
 
 
