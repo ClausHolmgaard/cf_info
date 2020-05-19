@@ -26,6 +26,7 @@ const Row = styled.div`
     flex: ${(props) => props.size};
     flex-direction: column;
     justify-content: space-between;
+    padding-top: ${(props) => props.paddingTop};
 `;
 
 function App() {
@@ -37,7 +38,7 @@ function App() {
             </Row>
         </Col>
         <Col size={1}>
-            <Row size={1}>
+            <Row size={1} paddingTop={'10px'}>
                 <InfoPanel />
             </Row>
             <Row size={1}>
