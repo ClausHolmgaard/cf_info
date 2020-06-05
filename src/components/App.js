@@ -4,7 +4,10 @@ import InfoPanel from "./Panels/InfoPanel";
 import WorkoutPanel from "./Panels/WorkoutPanel";
 import CoachPanel from "./Panels/CoachPanel";
 
-const infoUrl = 'http://localhost:3300'
+const workoutUrl = 'http://localhost:3300/workouts';
+const infoUrl = 'http://localhost:3300/info';
+const coachUrl = 'http://localhost:3300/coaches';
+const updateInterval =  5 * 1000;  // in ms
 
 const Grid = styled.div`
     display: flex;
@@ -34,15 +37,15 @@ function App() {
     <Grid>
         <Col size={1}>
             <Row size={1}>
-                <WorkoutPanel url={infoUrl}/>
+                <WorkoutPanel url={workoutUrl} update={updateInterval} />
             </Row>
         </Col>
         <Col size={1}>
             <Row size={1} paddingTop={'10px'}>
-                <InfoPanel />
+                <InfoPanel url={infoUrl} update={updateInterval} />
             </Row>
             <Row size={1}>
-                <CoachPanel />
+                <CoachPanel url={coachUrl} update={updateInterval} />
             </Row>
         </Col>
     </Grid>

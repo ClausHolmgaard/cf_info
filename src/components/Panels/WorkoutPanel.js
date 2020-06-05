@@ -4,7 +4,6 @@ import PanelDiv from "./PanelDiv";
 import TextBlock from "../TextBlock";
 import useInterval from "../../Helpers/UseInterval";
 
-const UPDATE_INTERVAL =  30 * 1000;  // in ms
 const REGEX_SPLIT = /\n-?/;
 
 const WorkoutPanel = (props) => {
@@ -21,10 +20,10 @@ const WorkoutPanel = (props) => {
 
         //console.log(`Current time: ${currentTimeString}`);
 
-        const workoutUrl = new URL(`${props.url}/workouts`);
+        const workoutUrl = new URL(`${props.url}`);
         workoutUrl.searchParams.append('dates', currentTimeString);
         workoutUrl.searchParams.append('track_id', 'NR6EwZlfwy');
-        console.log(workoutUrl.toString());
+        //console.log(workoutUrl.toString());
 
         fetch(workoutUrl.toString())
             .then(data => {
@@ -57,8 +56,8 @@ const WorkoutPanel = (props) => {
         } else {
             setWorkoutIndex(workoutIndex + 1);
         }
-        console.log(`WorkoutIndex: ${workoutIndex}`);
-    }, UPDATE_INTERVAL)
+        //console.log(`WorkoutIndex: ${workoutIndex}`);
+    }, parseInt(props.update, 10))
 
     const getTitle = (index) => {
         if(workoutJson.data === undefined) {
@@ -71,9 +70,7 @@ const WorkoutPanel = (props) => {
         if(workoutJson.data === undefined) {
             return ['No data'];
         }
-        //const descString =
-        //const descArray = descString.split('\n');
-        //console.log(descArray);
+
         return workoutJson.data[index].attributes.description.split(REGEX_SPLIT);
     }
 

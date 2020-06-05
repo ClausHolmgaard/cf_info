@@ -1,0 +1,7 @@
+Consider moving timer method to a more general location
+Make general getData method
+
+Consider how often data is fetched
+
+No reason to get all coaches to display one coach
+    (backend will need to support this /coach?id=...)
