@@ -11,13 +11,14 @@ const CoachImgDiv = styled.div`
     flex-direction: row;
     //flex-wrap: nowrap;
     //align-items: stretch;
-    justify-content: center;
+    justify-content: space-between;
     //border: 1px solid red;
 `;
 
 const CoachImg = styled.img`
-    position: absolute;
-    z-index: -1;
+    //position: absolute;
+    //z-index: -1;
+    float: left;
     //bottom: 5px;
     left: 5px;
     //max-height: 20%;
@@ -72,6 +73,7 @@ const CoachPanel = (props) => {
         }
 
         const numCoaches = Object.keys(coachJson.data).length;
+        //console.log(`Number of coahces: ${numCoaches}`);
         if(coachIndex === numCoaches - 1) {
             setCoachIndex(0);
         } else {
@@ -121,6 +123,7 @@ const CoachPanel = (props) => {
             <CoachImgDiv>
                 <CoachImg src={getImage(coachIndex)} />
                 <TextBlock textArr={InfoText} paddingTop={'10px'} />
+                <div />
                 <div />
             </CoachImgDiv>
 

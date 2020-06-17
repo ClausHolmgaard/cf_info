@@ -10,11 +10,15 @@ const StyledText = styled.div`
     //border: 1px solid blue;
 `;
 
+const LineDiv = styled.div`
+    white-space: pre-wrap;
+`;
 
 const TextBlock = ({textArr, paddingTop, paddingLeft, fontSize}) => {
+
     return (
         <StyledText paddingTop={paddingTop} paddingLeft={paddingLeft} fontSize={fontSize}>
-            {textArr.map((text, i) => <div key={i}>{text}</div>)}
+            {textArr.map((text, i) => <LineDiv key={i}>{text == "" ? ' ' : text}</LineDiv>)}
         </StyledText>
     )
 }

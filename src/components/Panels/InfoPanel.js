@@ -36,11 +36,12 @@ const InfoPanel = (props) => {
     useInterval( () => {
         getData();
 
-        if(infoJson.data === undefined) {
+        console.log(infoJson);
+        if(infoJson === undefined) {
             return;
         }
 
-        const numInfo = Object.keys(infoJson.data).length;
+        const numInfo = Object.keys(infoJson).length;
         //console.log(`Number of info's: ${numInfo}`);
         if(infoIndex === numInfo - 1) {
             setInfoIndex(0);
@@ -51,11 +52,11 @@ const InfoPanel = (props) => {
     }, parseInt(props.update, 10))
 
     const getLines = (index) => {
-        if(infoJson.data === undefined) {
+        if(infoJson[index] === undefined) {
             return ['No data'];
         }
 
-        return infoJson.data[index].lines
+        return infoJson[index]['Text'].split('\n')
     }
 
     const showError = () => {

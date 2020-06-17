@@ -1,55 +1,42 @@
 import React from 'react';
-import styled from "styled-components";
-import InfoPanel from "./Panels/InfoPanel";
-import WorkoutPanel from "./Panels/WorkoutPanel";
-import CoachPanel from "./Panels/CoachPanel";
+import { Switch, Route } from 'react-router-dom';
+import Main from './Main'
+import Config from './Config'
 
 const workoutUrl = 'http://localhost:3300/workouts';
 const infoUrl = 'http://localhost:3300/info';
 const coachUrl = 'http://localhost:3300/coaches';
-const updateInterval =  5 * 1000;  // in ms
-
-const Grid = styled.div`
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-    align-items: stretch;
-    flex-direction: row;
-`;
-
-const Col = styled.div`
-    display: flex;
-    align-items: stretch;
-    flex-direction: column;
-    flex: ${(props) => props.size};
-`;
-
-const Row = styled.div`
-    display: flex;
-    flex: ${(props) => props.size};
-    flex-direction: column;
-    justify-content: space-between;
-    padding-top: ${(props) => props.paddingTop};
-`;
+const updateInterval =  60 * 1000;  // in ms
 
 function App() {
   return (
-    <Grid>
-        <Col size={1}>
-            <Row size={1}>
-                <WorkoutPanel url={workoutUrl} update={updateInterval} />
-            </Row>
-        </Col>
-        <Col size={1}>
-            <Row size={1} paddingTop={'10px'}>
-                <InfoPanel url={infoUrl} update={updateInterval} />
-            </Row>
-            <Row size={1}>
-                <CoachPanel url={coachUrl} update={updateInterval} />
-            </Row>
-        </Col>
-    </Grid>
+      <div className="App">
+          <Switch>
+              <Route
+                  exact path='/'
+                  render = {(props) => (
+                      <Main {...props}
+                            workoutUrl={workoutUrl}
+                            infoUrl={infoUrl}
+                            coachUrl={coachUrl}
+                            updateInterval={updateInterval}
+                      />
+                  )}
 
+              />
+              <Route
+                  exact path='/Config'
+                  render = {(props) => (
+                      <Config
+                          {...props}
+                          infoUrl={infoUrl}
+                          coachUrl={coachUrl}
+                      />
+                  )}
+
+              />
+          </Switch>
+      </div>
   );
 }
 

@@ -1,3 +1,13 @@
+Create config page
+    Any config for workout pane?
+    Can set/remove/edit multiple info pages
+    Can edit coach info
+
+Backend can save info
+    Very simple local database at first
+        json-server
+
+
 Consider moving timer method to a more general location
 Make general getData method
 
@@ -5,3 +15,5 @@ Consider how often data is fetched
 
 No reason to get all coaches to display one coach
     (backend will need to support this /coach?id=...)
+
+Look into pagination on SugarWod
