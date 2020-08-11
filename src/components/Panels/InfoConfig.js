@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {ChildGrid, Col, Row} from '../../Helpers/FlexGrid'
-import {ConfigButton, DividerH, DividerV, EditButton} from "../../Helpers/MyStyles";
+import {ConfigButton, ContentDiv, DividerH, DividerV, EditButton} from "../../Helpers/MyStyles";
 import styled from "styled-components";
 
 const EditButtonRight = styled(EditButton)`
@@ -101,6 +101,23 @@ const InfoConfig = ({infoUrl}) => {
         }
     }
 
+    const showEditArea = () => {
+        if(currentIndex === 0) {
+            return <div></div>
+        }
+        return (
+            <ContentDiv>
+                <h1>{`Editing info message ${currentIndex}`}</h1>
+                <textarea name="Text1" rows="20" value={editValue} onChange={handleChange} />
+                <DividerV height={'5px'}/>
+                <div>
+                    <EditButton onClick={updatePost}>Save</EditButton>
+                    {showEditButtonRight()}
+                </div>
+            </ContentDiv>
+        );
+    }
+
     return (
         <ChildGrid>
             <Col size={1}>
@@ -108,12 +125,7 @@ const InfoConfig = ({infoUrl}) => {
                 <ConfigButton onClick={() => setIndex(undefined)}>New</ConfigButton>
             </Col>
             <Col size={4}>
-                <textarea name="Text1" rows="20" value={editValue} onChange={handleChange} />
-                <DividerV height={'5px'}/>
-                <div>
-                    <EditButton onClick={updatePost}>Save</EditButton>
-                    {showEditButtonRight()}
-                </div>
+                {showEditArea()}
             </Col>
             {showError()}
         </ChildGrid>

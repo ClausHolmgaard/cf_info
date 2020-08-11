@@ -17,7 +17,7 @@ const Config = ({infoUrl, coachUrl}) => {
 
     const CoachConfigWithUrl = () => {
         return (
-            <CoachConfig coahcUrl={coachUrl} />
+            <CoachConfig coachUrl={coachUrl} />
         )
     }
 

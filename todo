@@ -1,12 +1,23 @@
+Banner
+    CFH logo
+    'Crossfit Herning' (Anton font?)
+        like on cfh webpage
+
+    align workout and info pane just below banner
+
+Checkbox to decide which coaches to show
+    disabled default?
+
 Create config page
     Any config for workout pane?
-    Can set/remove/edit multiple info pages
-    Can edit coach info
 
-Backend can save info
-    Very simple local database at first
-        json-server
+Add general options to config
+    Page timer
+    Background color
+    more?
 
+Link to config on main page?
+    Only show on mouse movement/hover?
 
 Consider moving timer method to a more general location
 Make general getData method

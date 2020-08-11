@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ConfigButton = styled.h1`
+const ConfigButton = styled.h2`
     &:hover {
         border: 2px solid grey;
         border-radius: 5px;
@@ -34,4 +34,9 @@ const EditButton = styled.button`
     
 `;
 
-export {ConfigButton, DividerV, DividerH, EditButton};
+const ContentDiv = styled('div')`
+    display: flex;
+    flex-direction: column;
+`;
+
+export {ConfigButton, DividerV, DividerH, EditButton, ContentDiv};

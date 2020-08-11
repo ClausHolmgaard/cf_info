@@ -4,6 +4,7 @@ import TextBlock from "../TextBlock";
 import TopText from "../TopText";
 import PanelDiv from "./PanelDiv";
 import useInterval from "../../Helpers/UseInterval";
+import isEmpty from "../../Helpers/Misc"
 
 const CoachImgDiv = styled.div`
     position: relative;
@@ -68,11 +69,11 @@ const CoachPanel = (props) => {
     useInterval( () => {
         getData();
 
-        if(coachJson.data === undefined) {
+        if(coachJson === undefined) {
             return;
         }
 
-        const numCoaches = Object.keys(coachJson.data).length;
+        const numCoaches = Object.keys(coachJson).length;
         //console.log(`Number of coahces: ${numCoaches}`);
         if(coachIndex === numCoaches - 1) {
             setCoachIndex(0);
@@ -83,11 +84,11 @@ const CoachPanel = (props) => {
     }, parseInt(props.update, 10))
 
     const getImage = (index) => {
-        if(coachJson.data === undefined) {
+        if(coachJson === undefined || isEmpty(coachJson)) {
             return;
         }
 
-        const url = coachJson.data[index].attributes['profile_image_url'];
+        const url = coachJson[index].attributes['profile_image_url'];
         if(url === null) {
             return imageUrl;
         } else {
@@ -96,16 +97,28 @@ const CoachPanel = (props) => {
     }
 
     const getName = (index) => {
-        if(coachJson.data === undefined) {
-            return ['efef'];
+        console.log(coachJson);
+        if(coachJson === undefined || isEmpty(coachJson)) {
+            return [''];
         }
 
-        //console.log(coachJson.data[index]);
+        try{
+            const firstName = coachJson[index].attributes['first_name'];
+            const lastName = coachJson[index].attributes['last_name'];
 
-        const firstName = coachJson.data[index].attributes['first_name'];
-        const lastName = coachJson.data[index].attributes['last_name'];
+            return `${firstName ? firstName : 'XXX'} ${lastName ? lastName : 'XXX'}`;
+        } catch (err) {
+            return '';
+        }
 
-        return `${firstName ? firstName : 'XXX'} ${lastName ? lastName : 'XXX'}`;
+    }
+
+    const getLines = (index) => {
+        if(coachJson[index] === undefined) {
+            return ['No data'];
+        }
+
+        return coachJson[index]['Text'].split('\n')
     }
 
     const showError = () => {
@@ -122,7 +135,7 @@ const CoachPanel = (props) => {
 
             <CoachImgDiv>
                 <CoachImg src={getImage(coachIndex)} />
-                <TextBlock textArr={InfoText} paddingTop={'10px'} />
+                <TextBlock textArr={getLines(coachIndex)} paddingTop={'10px'} />
                 <div />
                 <div />
             </CoachImgDiv>
