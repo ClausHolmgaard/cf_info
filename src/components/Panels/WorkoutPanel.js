@@ -90,13 +90,13 @@ const WorkoutPanel = (props) => {
     }
 
     return (
-        <PanelDiv justifyContent={'space-evenly'}>
+        <PanelDiv justifyContent={'space-between'}>
             <TopText text={getTitle(workoutIndex)}/>
             <TextBlock textArr={getDescription(workoutIndex)} fontSize={'30px'}/>
 
-            <TextBlock textArr={getScoreType(workoutIndex)} />
+            {/*<TextBlock textArr={getScoreType(workoutIndex)} />*/}
+            <div></div>
 
-            {showError()}
         </PanelDiv>
     )
 }

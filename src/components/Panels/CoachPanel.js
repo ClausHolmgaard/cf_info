@@ -140,7 +140,6 @@ const CoachPanel = (props) => {
                 <div />
             </CoachImgDiv>
 
-            {showError()}
         </PanelDiv>
     )
 }

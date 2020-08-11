@@ -1,9 +1,12 @@
-Banner
-    CFH logo
-    'Crossfit Herning' (Anton font?)
-        like on cfh webpage
 
-    align workout and info pane just below banner
+Get all workouts!
+
+Display all tracks on a single pane
+    that is: switch between tracks
+
+    headline: Workout of the Day
+    Sub headlines: WOD
+                   Styrke
 
 Checkbox to decide which coaches to show
     disabled default?

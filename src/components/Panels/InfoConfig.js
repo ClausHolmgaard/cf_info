@@ -127,7 +127,7 @@ const InfoConfig = ({infoUrl}) => {
             <Col size={4}>
                 {showEditArea()}
             </Col>
-            {showError()}
+
         </ChildGrid>
 
     )

@@ -6,7 +6,7 @@ import Config from './Config'
 const workoutUrl = 'http://localhost:3300/workouts';
 const infoUrl = 'http://localhost:3300/info';
 const coachUrl = 'http://localhost:3300/coaches';
-const updateInterval =  60 * 1000;  // in ms
+const updateInterval =  5 * 1000;  // in ms
 
 function App() {
   return (
