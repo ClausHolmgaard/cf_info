@@ -32,7 +32,7 @@ const WorkoutPanel = (props) => {
         const trackUrl = new URL(`${props.trackUrl}`);
         trackUrl.searchParams.append('dates', currentTimeString);
 
-        const f1 = fetch(trackUrl.toString())
+        fetch(trackUrl.toString())
             .then(data => {
                 //console.log(data);
                 return data.json();
@@ -42,7 +42,7 @@ const WorkoutPanel = (props) => {
             })
             .catch(err => setErrors(err));
 
-        const f2 = fetch(workoutUrl.toString())
+        fetch(workoutUrl.toString())
             .then(data => {
                 //console.log(data);
                 return data.json();
