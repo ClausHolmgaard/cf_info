@@ -18,7 +18,7 @@ const TextBlock = ({textArr, paddingTop, paddingLeft, fontSize}) => {
 
     return (
         <StyledText paddingTop={paddingTop} paddingLeft={paddingLeft} fontSize={fontSize}>
-            {textArr.map((text, i) => <LineDiv key={i}>{text == "" ? ' ' : text}</LineDiv>)}
+            {textArr.map((text, i) => <LineDiv key={i}>{text === '' ? ' ' : text}</LineDiv>)}
         </StyledText>
     )
 }

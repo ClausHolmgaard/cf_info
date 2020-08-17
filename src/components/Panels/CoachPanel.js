@@ -30,19 +30,7 @@ const CoachImg = styled.img`
     //border: 1px solid blue;
 `;
 
-//const imageUrl = 'https://upload.wikimedia.org/wikipedia/commons/c/c4/PM5544_with_non-PAL_signals.png'
-const imageUrl = 'https://clausnet.dk/stick_face.jpg';
-
-const InfoText = [
-    'First line of info text',
-    'Second line of info text',
-    'And another line',
-    'Event more line!',
-    ':O',
-    'A very very very very very very very very very very long line',
-    'Event more line!',
-    'Event more line!',
-]
+const imageUrl = process.env.PUBLIC_URL + '/stick_face.jpg';
 
 const CoachPanel = (props) => {
     const [hasError, setErrors] = useState(false);
@@ -97,7 +85,7 @@ const CoachPanel = (props) => {
     }
 
     const getName = (index) => {
-        console.log(coachJson);
+        //console.log(coachJson);
         if(coachJson === undefined || isEmpty(coachJson)) {
             return [''];
         }
@@ -121,6 +109,8 @@ const CoachPanel = (props) => {
         return coachJson[index]['Text'].split('\n')
     }
 
+    // showError currently only used for debugging, ignoring warning
+    // eslint-disable-next-line
     const showError = () => {
         if(hasError) {
             return <div>Error when getting data</div>
@@ -135,7 +125,7 @@ const CoachPanel = (props) => {
 
             <CoachImgDiv>
                 <CoachImg src={getImage(coachIndex)} />
-                <TextBlock textArr={getLines(coachIndex)} paddingTop={'10px'} />
+                <TextBlock textArr={getLines(coachIndex)} paddingTop={'10px'} fontSize={'20px'}/>
                 <div />
                 <div />
             </CoachImgDiv>

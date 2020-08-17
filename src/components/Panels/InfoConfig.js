@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {ChildGrid, Col, Row} from '../../Helpers/FlexGrid'
-import {ConfigButton, ContentDiv, DividerH, DividerV, EditButton} from "../../Helpers/MyStyles";
+import {ChildGrid, Col} from '../../Helpers/FlexGrid'
+import {ConfigButton, ContentDiv, DividerV, EditButton} from "../../Helpers/MyStyles";
 import styled from "styled-components";
 
 const EditButtonRight = styled(EditButton)`
@@ -54,6 +54,8 @@ const InfoConfig = ({infoUrl}) => {
         return json[index]['Text']
     }
 
+    // showError currently only used for debugging, ignoring warning
+    // eslint-disable-next-line
     const showError = () => {
         if(hasError) {
             return <div>Error when getting data</div>

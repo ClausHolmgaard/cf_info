@@ -36,7 +36,7 @@ const InfoPanel = (props) => {
     useInterval( () => {
         getData();
 
-        console.log(infoJson);
+        //console.log(infoJson);
         if(infoJson === undefined) {
             return;
         }
@@ -59,6 +59,8 @@ const InfoPanel = (props) => {
         return infoJson[index]['Text'].split('\n')
     }
 
+    // showError currently only used for debugging, ignoring warning
+    // eslint-disable-next-line
     const showError = () => {
         if(hasError) {
             return <div>Error when getting data</div>
@@ -71,11 +73,10 @@ const InfoPanel = (props) => {
         <PanelDiv justifyContent={'space-between'}>
             <TopText text={'Info'} />
             <TextDiv>
-                <TextBlock textArr={getLines(infoIndex)}/>
+                <TextBlock textArr={getLines(infoIndex)} fontSize={'20px'}/>
             </TextDiv>
             <div></div>
 
-            {showError()}
         </PanelDiv>
     )
 }

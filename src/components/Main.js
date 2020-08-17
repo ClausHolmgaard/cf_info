@@ -25,9 +25,9 @@ const LogoText = styled.h1`
     margin-bottom: auto;
 `;
 
-const logoUrl = 'https://clausnet.dk/cfh_logo.png';
+const logoUrl = process.env.PUBLIC_URL + '/cfh_logo.png';
 
-const Main = ({workoutUrl, infoUrl, coachUrl, updateInterval}) => {
+const Main = ({workoutUrl, infoUrl, coachUrl, trackUrl, updateInterval}) => {
     return (
         <MainGrid>
             <MainHeadline>
@@ -37,7 +37,7 @@ const Main = ({workoutUrl, infoUrl, coachUrl, updateInterval}) => {
             <Grid>
                 <Col size={1}>
                     <Row size={1} paddingTop={'10px'}>
-                        <WorkoutPanel url={workoutUrl} update={updateInterval} />
+                        <WorkoutPanel url={workoutUrl} trackUrl={trackUrl} update={updateInterval} />
                     </Row>
                 </Col>
                 <Col size={1}>

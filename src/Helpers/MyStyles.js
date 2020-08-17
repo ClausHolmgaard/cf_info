@@ -39,4 +39,8 @@ const ContentDiv = styled('div')`
     flex-direction: column;
 `;
 
-export {ConfigButton, DividerV, DividerH, EditButton, ContentDiv};
+const SubText = styled.h3`
+    text-align: center;
+`;
+
+export {ConfigButton, DividerV, DividerH, EditButton, ContentDiv, SubText};

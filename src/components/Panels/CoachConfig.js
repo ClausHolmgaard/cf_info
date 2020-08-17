@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {ChildGrid, Col} from "../../Helpers/FlexGrid";
 import {ConfigButton, DividerV, EditButton, ContentDiv} from "../../Helpers/MyStyles";
-import styled from "styled-components";
-import index from "styled-components/dist/styled-components-macro.esm";
 
 const CoachConfig = ({coachUrl}) => {
     const [json, setJson] = useState(0);
