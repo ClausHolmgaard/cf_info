@@ -4,16 +4,31 @@ import PanelDiv from "./PanelDiv";
 import TextBlock from "../TextBlock";
 import useInterval from "../../Helpers/UseInterval";
 import isEmpty from "../../Helpers/Misc";
-import {SubText} from "../../Helpers/MyStyles";
+import {SubText, ContentDiv} from "../../Helpers/MyStyles";
 import styled from "styled-components";
 
-const WorkoutTextDiv = styled('div')`
-    //display: flex;
-    //flex-direction: column;
-    height: 100%
-`;
+const Scroll = require('react-scroll');
+const scroller = Scroll.scroller;
 
 const REGEX_SPLIT = /\n-?/;
+
+const WorkoutContentDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: scroll;
+    height: 100%;
+    justify-content: space-between;
+    
+    // disable visible scrollbar
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+`;
+
 
 const WorkoutPanel = (props) => {
     const [hasError, setErrors] = useState(false);
@@ -22,6 +37,7 @@ const WorkoutPanel = (props) => {
     const [trackIndex, setTrackIndex] = useState(0);
     const [validTracks, setValidTracks] = useState([]);
     const [title, setTitle] = useState('');
+    const [currentScroll, setCurrentScroll] = useState(0);
 
     const getData = () => {
         const currentTime = new Date();
@@ -64,32 +80,9 @@ const WorkoutPanel = (props) => {
     }
 
     useEffect(() => {
-        //getData().then(() => updateIndex());
         getData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
-    useInterval( () => {
-        //getData().then(() => updateIndex());
-        getData();
-
-
-        // Find all tracks in todays workouts
-
-        //console.log('valid tracks: ' + validTracks);
-        //console.log('current index: ' + trackIndex);
-
-        /*
-        const numTracks = Object.keys(trackJson.data).length;
-
-        if(trackIndex === numTracks - 1) {
-            setTrackIndex(0);
-        } else {
-            setTrackJson(trackIndex + 1);
-        }
-        */
-        //console.log(`WorkoutIndex: ${workoutIndex}`);
-    }, parseInt(props.update, 10))
 
     useEffect(() => {
         updateIndex();
@@ -101,6 +94,39 @@ const WorkoutPanel = (props) => {
         setTitle(newTitle);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [validTracks])
+
+    useInterval( () => {
+        getData();
+    }, parseInt(props.update, 10))
+
+    useInterval(() => {
+        const workoutPanelHeight =  document.getElementById('WorkoutPanel').clientHeight;
+        const workoutContentHeight = document.getElementById('WorkoutContent').clientHeight;
+
+        const difference = workoutContentHeight - workoutPanelHeight - currentScroll;
+
+        if(difference > 0) {
+            const scrollDistance = difference > workoutPanelHeight ? workoutPanelHeight : difference;
+            scroller.scrollTo('WorkoutPanel', {
+                duration: 1500,
+                delay: 100,
+                smooth: true,
+                containerId: 'WorkoutPanel',
+                offset: scrollDistance
+            })
+            setCurrentScroll(currentScroll + workoutPanelHeight);
+        } else {
+            scroller.scrollTo('WorkoutPanel', {
+                duration: 1500,
+                delay: 100,
+                smooth: true,
+                containerId: 'WorkoutPanel',
+                offset: 0, // Scrolls to element + 50 pixels down the page
+            })
+            setCurrentScroll(0);
+        }
+
+    }, parseInt(props.scrollInterval, 10))
 
     const updateIndex = () => {
         if(!isEmpty(workoutJson)){
@@ -192,44 +218,37 @@ const WorkoutPanel = (props) => {
     }
 
     const workoutTextAndTitle = (index) => {
-        //getTrackWorkouts(index);
-
-        /*
-        return getTrackWorkouts(index).map((t, index) =>
-            <div key={index}>
-                <SubText>{t['attributes'] === undefined ? '' : t['attributes']['title']}</SubText>
-                <TextBlock textArr={getDescription(t)}></TextBlock>
-            </div>
-        )
-        */
 
         const workoutBlock = getTrackWorkouts(index).filter(x => x['attributes'] !== undefined).map((t, index) =>
             <div key={index}>
                 <SubText>{t['attributes'] === undefined ? '' : t['attributes']['title']}</SubText>
-                <TextBlock textArr={getDescription(t)} fontSize={'12px'}></TextBlock>
+                <TextBlock textArr={getDescription(t)} fontSize={'20px'} textAlign={'center'}></TextBlock>
             </div>
         )
 
-
+        /*
         // Need to move the text up a bit, if theres only one entry
         // TODO: is there a better way to do this in the layout?
         if(workoutBlock.length === 1) {
-            return workoutBlock.concat(<div key={-1}></div>);
+            return <ContentDiv id={'WorkoutContent'}>{workoutBlock.concat(<div key={-1}></div>)}</ContentDiv>;
         } else {
-            return workoutBlock;
+            return <ContentDiv id={'WorkoutContent'}>{workoutBlock}</ContentDiv>;
         }
+        */
+        return <ContentDiv justifyContent={'space-around'} id={'WorkoutContent'}>{workoutBlock}</ContentDiv>
     }
 
     return (
         <PanelDiv justifyContent={'space-between'}>
+
             {/*<TopText text={getTitle(trackIndex)}/>*/}
-            <TopText text={title}></TopText>
+            <TopText id={'WorkoutTitle'} text={title}></TopText>
             {/*<TextBlock textArr={getDescription(trackIndex)} fontSize={'20px'}/>*/}
 
-            {workoutTextAndTitle(trackIndex)}
-
+            <WorkoutContentDiv id={'WorkoutPanel'}>
+                {workoutTextAndTitle(trackIndex)}
+            </WorkoutContentDiv>
             {/*<TextBlock textArr={getScoreType(workoutIndex)} />*/}
-            <div></div>
 
         </PanelDiv>
 

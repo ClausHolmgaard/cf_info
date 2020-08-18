@@ -16,9 +16,9 @@ const StyledText = styled.h1`
     text-align: center;
 `;
 
-const TopText = ({text, paddingTop}) => {
+const TopText = ({text, paddingTop, id}) => {
     return (
-        <StyledHeader paddingTop={paddingTop}>
+        <StyledHeader paddingTop={paddingTop} id={id}>
             <StyledText>{text}</StyledText>
         </StyledHeader>
 

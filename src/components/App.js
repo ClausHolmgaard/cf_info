@@ -7,7 +7,8 @@ const workoutUrl = 'http://localhost:3300/workouts';
 const infoUrl = 'http://localhost:3300/info';
 const coachUrl = 'http://localhost:3300/coaches';
 const trackUrl = 'http://localhost:3300/tracks';
-const updateInterval =  30 * 1000;  // in ms
+const updateInterval = 60 * 1000;  // in ms
+const scrollInterval = 11 * 1000;
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
                             coachUrl={coachUrl}
                             trackUrl={trackUrl}
                             updateInterval={updateInterval}
+                            scrollInterval={scrollInterval}
                       />
                   )}
 

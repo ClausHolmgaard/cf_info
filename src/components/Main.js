@@ -27,9 +27,9 @@ const LogoText = styled.h1`
 
 const logoUrl = process.env.PUBLIC_URL + '/cfh_logo.png';
 
-const Main = ({workoutUrl, infoUrl, coachUrl, trackUrl, updateInterval}) => {
+const Main = ({workoutUrl, infoUrl, coachUrl, trackUrl, updateInterval, scrollInterval}) => {
     return (
-        <MainGrid>
+        <MainGrid id={'MainGrid'}>
             <MainHeadline>
                 <LogoImg src={logoUrl} />
                 <LogoText>CROSSFIT HERNING</LogoText>
@@ -37,15 +37,15 @@ const Main = ({workoutUrl, infoUrl, coachUrl, trackUrl, updateInterval}) => {
             <Grid>
                 <Col size={1}>
                     <Row size={1} paddingTop={'10px'}>
-                        <WorkoutPanel url={workoutUrl} trackUrl={trackUrl} update={updateInterval} />
+                        <WorkoutPanel url={workoutUrl} trackUrl={trackUrl} update={updateInterval} scrollInterval={scrollInterval} />
                     </Row>
                 </Col>
                 <Col size={1}>
                     <Row size={1} paddingTop={'10px'}>
-                        <InfoPanel url={infoUrl} update={updateInterval} />
+                        <InfoPanel url={infoUrl} update={updateInterval} scrollInterval={scrollInterval} />
                     </Row>
                     <Row size={1}>
-                        <CoachPanel url={coachUrl} update={updateInterval} />
+                        <CoachPanel url={coachUrl} update={updateInterval} scrollInterval={scrollInterval} />
                     </Row>
                 </Col>
             </Grid>

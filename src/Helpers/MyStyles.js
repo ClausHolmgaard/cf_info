@@ -36,11 +36,30 @@ const EditButton = styled.button`
 
 const ContentDiv = styled('div')`
     display: flex;
+    flex: 1;
     flex-direction: column;
+    //height: 100%
+    justify-content: ${(props) => props.justifyContent};
+    //border: 1px solid red;
 `;
 
 const SubText = styled.h3`
     text-align: center;
 `;
 
-export {ConfigButton, DividerV, DividerH, EditButton, ContentDiv, SubText};
+const TextDiv = styled.div`
+    //position: relative;
+    //top: 30%;
+    //transform: translateY(-50%);
+    overflow: auto;
+    
+    // disable visible scrollbar
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+`;
+
+export {ConfigButton, DividerV, DividerH, EditButton, ContentDiv, SubText, TextDiv};

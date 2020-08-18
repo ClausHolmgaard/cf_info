@@ -1,20 +1,18 @@
 import React, {useEffect, useState} from "react";
-import styled from "styled-components";
 import TopText from "../TopText";
 import TextBlock from "../TextBlock";
 import PanelDiv from "./PanelDiv";
 import useInterval from "../../Helpers/UseInterval";
+import {TextDiv} from "../../Helpers/MyStyles";
 
-const TextDiv = styled.div`
-    //position: relative;
-    //top: 30%;
-    //transform: translateY(-50%);
-`;
+const Scroll = require('react-scroll');
+const scroller = Scroll.scroller;
 
 const InfoPanel = (props) => {
     const [hasError, setErrors] = useState(false);
     const [infoJson, setInfoJson] = useState({});
     const [infoIndex, setInfoIndex] = useState(0);
+    const [currentScroll, setCurrentScroll] = useState(0);
 
     const getData = () => {
         fetch(`${props.url}`)
@@ -51,6 +49,39 @@ const InfoPanel = (props) => {
         //console.log(`InfoIndex: ${infoIndex}`);
     }, parseInt(props.update, 10))
 
+    useInterval(() => {
+        const infoPanelHeight =  document.getElementById('InfoPanel').clientHeight;
+        const infoContentHeight = document.getElementById('InfoContent').clientHeight;
+
+        const difference = infoContentHeight - infoPanelHeight - currentScroll;
+
+        //console.log(`infoPanelHeight: ${infoPanelHeight}`);
+        //console.log(`infoContentHeight: ${infoContentHeight}`);
+        //console.log(`difference: ${difference}`);
+
+        if(difference > 0) {
+            const scrollDistance = difference > infoPanelHeight ? infoPanelHeight : difference;
+            scroller.scrollTo('InfoPanel', {
+                duration: 1500,
+                delay: 100,
+                smooth: true,
+                containerId: 'InfoPanel',
+                offset: scrollDistance
+            })
+            setCurrentScroll(currentScroll + infoPanelHeight);
+        } else {
+            scroller.scrollTo('InfoPanel', {
+                duration: 1500,
+                delay: 100,
+                smooth: true,
+                containerId: 'InfoPanel',
+                offset: 0, // Scrolls to element + 50 pixels down the page
+            })
+            setCurrentScroll(0);
+        }
+
+    }, parseInt(props.scrollInterval, 10))
+
     const getLines = (index) => {
         if(infoJson[index] === undefined) {
             return [''];
@@ -72,8 +103,8 @@ const InfoPanel = (props) => {
     return (
         <PanelDiv justifyContent={'space-between'}>
             <TopText text={'Info'} />
-            <TextDiv>
-                <TextBlock textArr={getLines(infoIndex)} fontSize={'20px'}/>
+            <TextDiv id={'InfoPanel'}>
+                <TextBlock textArr={getLines(infoIndex)} fontSize={'20px'} id={'InfoContent'}/>
             </TextDiv>
             <div></div>
 

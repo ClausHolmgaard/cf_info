@@ -1,13 +1,5 @@
 import styled from "styled-components";
 
-const MainHeadline = styled.div`
-    display: flex;
-    align-items: stretch;
-    flex-direction: row;
-    align-self: center;
-    font-family: antonFont;
-`;
-
 const MainGrid = styled.div`
     display: flex;
     height: 100vh;
@@ -17,11 +9,18 @@ const MainGrid = styled.div`
     overflow: hidden;
 `;
 
+const MainHeadline = styled.div`
+    display: flex;
+    align-items: stretch;
+    flex-direction: row;
+    align-self: center;
+    font-family: antonFont;
+    height: 10%;
+`;
+
 const Grid = styled.div`
     display: flex;
-    //height: 100vh;
-    //width: 100vw;
-    height: 100%;
+    height: 85%;
     width: 100%;
     align-items: stretch;
     flex-direction: row;
@@ -50,8 +49,9 @@ const Row = styled.div`
     flex-direction: column;
     justify-content: space-between;
     padding-top: ${(props) => props.paddingTop};
-    height: 100%;
-    width: 100%;
+    //height: 100%;
+    //width: 100%;
+    min-height: 0;
 `;
 
 export {Grid, ChildGrid, Col, Row, MainGrid, MainHeadline};
