@@ -7,7 +7,7 @@ const workoutUrl = 'http://localhost:3300/workouts';
 const infoUrl = 'http://localhost:3300/info';
 const coachUrl = 'http://localhost:3300/coaches';
 const trackUrl = 'http://localhost:3300/tracks';
-const updateInterval =  60 * 1000;  // in ms
+const updateInterval =  30 * 1000;  // in ms
 
 function App() {
   return (

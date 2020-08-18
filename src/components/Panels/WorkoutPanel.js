@@ -5,6 +5,13 @@ import TextBlock from "../TextBlock";
 import useInterval from "../../Helpers/UseInterval";
 import isEmpty from "../../Helpers/Misc";
 import {SubText} from "../../Helpers/MyStyles";
+import styled from "styled-components";
+
+const WorkoutTextDiv = styled('div')`
+    //display: flex;
+    //flex-direction: column;
+    height: 100%
+`;
 
 const REGEX_SPLIT = /\n-?/;
 
@@ -199,9 +206,10 @@ const WorkoutPanel = (props) => {
         const workoutBlock = getTrackWorkouts(index).filter(x => x['attributes'] !== undefined).map((t, index) =>
             <div key={index}>
                 <SubText>{t['attributes'] === undefined ? '' : t['attributes']['title']}</SubText>
-                <TextBlock textArr={getDescription(t)} fontSize={'20px'}></TextBlock>
+                <TextBlock textArr={getDescription(t)} fontSize={'12px'}></TextBlock>
             </div>
         )
+
 
         // Need to move the text up a bit, if theres only one entry
         // TODO: is there a better way to do this in the layout?

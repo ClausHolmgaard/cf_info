@@ -1,12 +1,7 @@
 
-Get all workouts!
 
-Display all tracks on a single pane
-    that is: switch between tracks
-
-    headline: Workout of the Day
-    Sub headlines: WOD
-                   Styrke
+Handle large workouts
+    change font size depending on number of lines?
 
 Checkbox to decide which coaches to show
     disabled default?

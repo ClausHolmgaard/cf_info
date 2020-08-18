@@ -14,6 +14,7 @@ const MainGrid = styled.div`
     width: 100vw;
     align-items: stretch;
     flex-direction: column;
+    overflow: hidden;
 `;
 
 const Grid = styled.div`
@@ -39,6 +40,8 @@ const Col = styled.div`
     align-items: stretch;
     flex-direction: column;
     flex: ${(props) => props.size};
+    height: 100%;
+    width: 100%;
 `;
 
 const Row = styled.div`
@@ -47,6 +50,8 @@ const Row = styled.div`
     flex-direction: column;
     justify-content: space-between;
     padding-top: ${(props) => props.paddingTop};
+    height: 100%;
+    width: 100%;
 `;
 
 export {Grid, ChildGrid, Col, Row, MainGrid, MainHeadline};

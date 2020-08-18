@@ -6,6 +6,8 @@ const PanelDiv = styled.div`
     flex-direction: column;
     justify-content: ${(props) => props.justifyContent};
     //border: 1px solid yellow;
+    height: 100%;
+    width: 100%;
 `;
 
 export default PanelDiv
