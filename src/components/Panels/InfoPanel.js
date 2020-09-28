@@ -104,7 +104,7 @@ const InfoPanel = (props) => {
         <PanelDiv justifyContent={'space-between'}>
             <TopText text={'Info'} />
             <TextDiv id={'InfoPanel'}>
-                <TextBlock textArr={getLines(infoIndex)} fontSize={'20px'} id={'InfoContent'}/>
+                <TextBlock paddingLeft={'60px'} textArr={getLines(infoIndex)} fontSize={'21px'} id={'InfoContent'}/>
             </TextDiv>
             <div></div>
 

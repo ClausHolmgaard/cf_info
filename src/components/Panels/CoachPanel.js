@@ -191,7 +191,7 @@ const CoachPanel = (props) => {
             </CoachImgDiv>*/}
             <CoachImgDiv>
                 <CoachTextDiv id={'CoachPanel'}>
-                    <TextBlock textArr={getLines(coachIndex)} fontSize={'20px'} id={'CoachContent'}/>
+                    <TextBlock paddingLeft={'60px'} textArr={getLines(coachIndex)} fontSize={'21px'} id={'CoachContent'}/>
                 </CoachTextDiv>
                 <CoachImg src={getImage(coachIndex)} />
             </CoachImgDiv>

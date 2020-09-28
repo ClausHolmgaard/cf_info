@@ -222,7 +222,7 @@ const WorkoutPanel = (props) => {
         const workoutBlock = getTrackWorkouts(index).filter(x => x['attributes'] !== undefined).map((t, index) =>
             <div key={index}>
                 <SubText>{t['attributes'] === undefined ? '' : t['attributes']['title']}</SubText>
-                <TextBlock textArr={getDescription(t)} fontSize={'20px'} textAlign={'center'}></TextBlock>
+                <TextBlock textArr={getDescription(t)} fontSize={'21px'} textAlign={'center'}></TextBlock>
             </div>
         )
 

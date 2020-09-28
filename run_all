@@ -1,0 +1,6 @@
+cd ../cf_backend
+json-server --watch db.json --port 3400
+npm start
+cd ../cf_info
+npm start
+
