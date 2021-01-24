@@ -86,6 +86,9 @@ const InfoPanel = (props) => {
         if(infoJson[index] === undefined) {
             return [''];
         }
+        if(infoJson[index]['Text'] === undefined) {
+            return [''];
+        }
 
         return infoJson[index]['Text'].split('\n')
     }

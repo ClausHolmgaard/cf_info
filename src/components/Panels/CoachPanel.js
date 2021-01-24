@@ -4,7 +4,7 @@ import TextBlock from "../TextBlock";
 import TopText from "../TopText";
 import PanelDiv from "./PanelDiv";
 import useInterval from "../../Helpers/UseInterval";
-import isEmpty from "../../Helpers/Misc"
+import isEmpty from "../../Helpers/Misc";
 
 const Scroll = require('react-scroll');
 const scroller = Scroll.scroller;
@@ -161,6 +161,9 @@ const CoachPanel = (props) => {
 
     const getLines = (index) => {
         if(coachJson[index] === undefined) {
+            return ['No data'];
+        }
+        if(coachJson[index]['Text'] === undefined) {
             return ['No data'];
         }
 

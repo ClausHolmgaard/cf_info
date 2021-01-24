@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {ChildGrid, Col} from "../../Helpers/FlexGrid";
-import {ConfigButton, DividerV, EditButton, ContentDiv} from "../../Helpers/MyStyles";
+import {ConfigButton, DividerV, EditButton, ContentDiv, DividerH} from "../../Helpers/MyStyles";
 
 const CoachConfig = ({coachUrl}) => {
     const [json, setJson] = useState(0);
@@ -83,7 +83,15 @@ const CoachConfig = ({coachUrl}) => {
         }
         return (
             <ContentDiv>
-                <h1>{`${json[currentIndex]['attributes']['first_name']} ${json[currentIndex]['attributes']['last_name']}`}</h1>
+                <h1>
+                    {`${json[currentIndex]['attributes']['first_name']} ${json[currentIndex]['attributes']['last_name']}`}
+                    <DividerH width={'10px'}></DividerH>
+                    <input
+                        name="doShow"
+                        type="checkbox"
+                        cssClass="e-success"
+                        onChange={handleShowChange} />
+                </h1>
                 <textarea name="Text1" rows="20" value={editValue} onChange={handleChange} />
                 <DividerV height={'5px'}/>
                 <div>
@@ -91,6 +99,10 @@ const CoachConfig = ({coachUrl}) => {
                 </div>
             </ContentDiv>
             );
+    }
+
+    const handleShowChange = (event) => {
+
     }
 
     return (
