@@ -8,6 +8,7 @@ const CoachConfig = ({coachUrl}) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [editValue, setEditValue] = useState('');
     const [reFetch, setReFetch] = useState(false);
+    const [showCoach, setShowCoach] = useState(true);
 
     const setIndex = (index) => {
         setCurrentIndex(index);
@@ -56,6 +57,8 @@ const CoachConfig = ({coachUrl}) => {
             url.searchParams.append('id', json[currentIndex]['id']);
         }
         const postBody = {Text: editValue};
+        // TODO: DoShow: showCoach
+        // Implement in backend
 
         fetch(url.toString(), {
             headers: {
@@ -89,7 +92,8 @@ const CoachConfig = ({coachUrl}) => {
                     <input
                         name="doShow"
                         type="checkbox"
-                        cssClass="e-success"
+                        cssclass="e-success"
+                        defaultChecked={showCoach}
                         onChange={handleShowChange} />
                 </h1>
                 <textarea name="Text1" rows="20" value={editValue} onChange={handleChange} />
@@ -102,7 +106,7 @@ const CoachConfig = ({coachUrl}) => {
     }
 
     const handleShowChange = (event) => {
-
+        setShowCoach(event.target.checked);
     }
 
     return (
