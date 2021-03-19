@@ -13,6 +13,7 @@ const CoachConfig = ({coachUrl}) => {
     const setIndex = (index) => {
         setCurrentIndex(index);
         setEditValue(getLines(index));
+        setShowCoach(json[index]['data']['Show']);
     }
 
     const getData = (url) => {
@@ -21,7 +22,7 @@ const CoachConfig = ({coachUrl}) => {
                 return data.json();
             })
             .then(json => {
-                console.log(json)
+                //console.log(json)
                 setJson(json);
             })
             .catch(err => {
@@ -46,8 +47,8 @@ const CoachConfig = ({coachUrl}) => {
         if(json[index] === undefined) {
             return ['No data'];
         }
-        console.log(json)
-        return json[index]['Text']
+        //console.log(json)
+        return json[index]['data']['Text']
     }
 
     const updatePost = () => {
@@ -56,7 +57,8 @@ const CoachConfig = ({coachUrl}) => {
         if(currentIndex !== undefined) {
             url.searchParams.append('id', json[currentIndex]['id']);
         }
-        const postBody = {Text: editValue};
+        const postBody = {Text: editValue,
+                          Show: showCoach};
         // TODO: DoShow: showCoach
         // Implement in backend
 
@@ -93,7 +95,7 @@ const CoachConfig = ({coachUrl}) => {
                         name="doShow"
                         type="checkbox"
                         cssclass="e-success"
-                        defaultChecked={showCoach}
+                        checked={showCoach}
                         onChange={handleShowChange} />
                 </h1>
                 <textarea name="Text1" rows="20" value={editValue} onChange={handleChange} />

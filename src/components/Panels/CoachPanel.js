@@ -58,7 +58,7 @@ const imageUrl = process.env.PUBLIC_URL + '/stick_face.jpg';
 const CoachPanel = (props) => {
     const [hasError, setErrors] = useState(false);
     const [coachJson, setCoachJson] = useState({});
-    const [coachIndex, setCoachIndex] = useState(0);
+    const [coachIndex, setCoachIndex] = useState(-1);
     const [currentScroll, setCurrentScroll] = useState(0);
 
     const getData = () => {
@@ -78,6 +78,10 @@ const CoachPanel = (props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    useEffect( () => {
+        setCoachIndex(getNextShowId(coachIndex));
+    }, [coachJson])
+
     useInterval( () => {
         getData();
 
@@ -85,14 +89,17 @@ const CoachPanel = (props) => {
             return;
         }
 
-        const numCoaches = Object.keys(coachJson).length;
+        //const numCoaches = Object.keys(coachJson).length;
         //console.log(`Number of coahces: ${numCoaches}`);
+        
+        /*
         if(coachIndex === numCoaches - 1) {
             setCoachIndex(0);
         } else {
             setCoachIndex(coachIndex + 1);
         }
-        //console.log(`WorkoutIndex: ${coachIndex}`);
+        */
+
     }, parseInt(props.update, 10))
 
     useInterval(() => {
@@ -100,10 +107,6 @@ const CoachPanel = (props) => {
         const coachContentHeight = document.getElementById('CoachContent').clientHeight;
 
         const difference = coachContentHeight - coachPanelHeight - currentScroll;
-
-        //console.log(`infoPanelHeight: ${coachPanelHeight}`);
-        //console.log(`infoContentHeight: ${coachContentHeight}`);
-        //console.log(`difference: ${difference}`);
 
         if(difference > 0) {
             const scrollDistance = difference > coachPanelHeight ? coachPanelHeight : difference;
@@ -128,9 +131,44 @@ const CoachPanel = (props) => {
 
     }, parseInt(props.scrollInterval, 10))
 
+    // Check if theres a coach with show flag set to true
+    const canShowCoach = () => {
+        if(coachJson === undefined || isEmpty(coachJson)) {
+            return false;
+        }
+
+       const anyCoaches = coachJson.some(e => e['data']['Show'] === true);
+
+       if(anyCoaches) {
+            //console.log('coahces found');
+            return true;
+       } else {
+            console.log('No coach with show flag set found.');
+            return false;
+       }
+    }
+
+    // Get next coachId with show flag not set to false
+    const getNextShowId = (currentId) => {
+        if(canShowCoach()) {
+            // Not pretty... =/
+            const nextId = coachJson.findIndex((el, i) => el['data']['Show'] === true && i > currentId);
+            if(nextId !== -1) {
+                return nextId;
+            } else {
+                return coachJson.findIndex(el => el['data']['Show'] === true);
+            }
+        } else {
+            return -1;
+        }
+    }
 
     const getImage = (index) => {
         if(coachJson === undefined || isEmpty(coachJson)) {
+            return;
+        }
+
+        if(index === -1) {
             return;
         }
 
@@ -148,6 +186,10 @@ const CoachPanel = (props) => {
             return [''];
         }
 
+        if(index === -1) {
+            return [''];
+        }
+
         try{
             const firstName = coachJson[index].attributes['first_name'];
             const lastName = coachJson[index].attributes['last_name'];
@@ -160,14 +202,18 @@ const CoachPanel = (props) => {
     }
 
     const getLines = (index) => {
+        if(index === -1) {
+            return [''];
+        }
+
         if(coachJson[index] === undefined) {
             return ['No data'];
         }
-        if(coachJson[index]['Text'] === undefined) {
+        if(coachJson[index]['data']['Text'] === undefined) {
             return ['No data'];
         }
 
-        return coachJson[index]['Text'].split('\n')
+        return coachJson[index]['data']['Text'].split('\n')
     }
 
     // showError currently only used for debugging, ignoring warning
