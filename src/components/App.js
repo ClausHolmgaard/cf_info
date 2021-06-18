@@ -15,7 +15,7 @@ function App() {
       <div className="App">
           <Switch>
               <Route
-                  path='/'
+                  exact path='/'
                   render = {(props) => (
                       <Main {...props}
                             workoutUrl={workoutUrl}
@@ -29,7 +29,7 @@ function App() {
 
               />
               <Route
-                  path='/Config'
+                  exact path='/Config'
                   render = {(props) => (
                       <Config
                           {...props}
