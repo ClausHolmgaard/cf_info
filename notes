@@ -1,0 +1,46 @@
+On rpi:
+Desktop configs at the bottom
+
+run all:
+lxterminal -e "/bin/bash -c 'chromium-browser --kiosk --user-data-dir="/home/pi/s2" --window-position=1920,0 https://google.com'"
+lxterminal -e "/bin/bash -c 'cd ~/infoscreen/cf_backend; json-server --watch db.json --port 3400; /bin/bash'"
+lxterminal -e "/bin/bash -c 'cd ~/infoscreen/cf_backend; npm start; /bin/bash'"
+lxterminal -e "/bin/bash -c 'cd ~/infoscreen/cf_info; npm start; /bin/bash'"
+#npm start
+lxterminal -e "/bin/bash -c 'sleep 20; chromium-browser --kiosk --user-data-dir="/home/pi/s1" --window-position=0,0 http://localhost:3000'"
+
+
+put the start .desktop file in /etc/xdg/autostart for autostart
+
+
+Start info screen:
+
+[Desktop Entry]
+Name=Start Infoscreen
+Comment=Start Infoscreen
+Icon=/usr/share/pixmaps/galculator.xpm
+Exec=lxterminal -e "~/infoscreen/cf_info/run_all"
+Type=Application
+Encoding=UTF-8
+Terminal=true
+Categories=None;
+
+
+Open main page:
+
+[Desktop Entry]
+Type=Link
+Comment=Show main page
+Icon=/usr/share/pixmaps/chromium-browser.png
+URL=http://localhost:3000
+Name=Infoscreen Main Page
+
+
+Open config:
+
+[Desktop Entry]
+Type=Link
+Comment=Show config page
+Icon=/usr/share/pixmaps/obconf.png
+URL=http://localhost:3000/Config
+Name=Infoscreen Config Page
