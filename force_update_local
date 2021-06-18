@@ -7,4 +7,6 @@ git fetch origin master
 git reset --hard origin/master
 
 cd ~/infoscreen/cf_info
+chmod +x force_update_local
+chmod +x run_all
 npm run build
