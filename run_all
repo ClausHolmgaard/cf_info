@@ -3,7 +3,7 @@ lxterminal -e "/bin/bash -c 'cd ~/infoscreen/cf_backend; json-server --watch db.
 lxterminal -e "/bin/bash -c 'cd ~/infoscreen/cf_backend; node server.js; /bin/bash'"
 lxterminal -e "/bin/bash -c 'cd ~/infoscreen/cf_info; serve -s build; /bin/bash'"
 #npm start
-lxterminal -e "/bin/bash -c 'sleep 20; chromium-browser --kiosk --user-data-dir="/home/pi/s1" --window-position=0,0 http://localhost:5000'"
+lxterminal -e "/bin/bash -c 'sleep 2; chromium-browser --kiosk --user-data-dir="/home/pi/s1" --window-position=0,0 http://localhost:5000'"
 
 
 # npm run build
