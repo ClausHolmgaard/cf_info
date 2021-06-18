@@ -1,4 +1,10 @@
+cd ~/infoscreen/cf_info
 git fetch origin master
 git reset --hard origin/master
 
+cd ~/infoscreen/cf_backend
+git fetch origin master
+git reset --hard origin/master
+
+cd ~/infoscreen/cf_info
 npm run build
